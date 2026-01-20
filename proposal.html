@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Proposal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(120deg, #a18cd1, #fbc2eb);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #fff;
+        overflow: hidden;
+    }
+
+    .wrap {
+        background: rgba(0,0,0,.4);
+        padding: 42px;
+        border-radius: 24px;
+        width: 90%;
+        max-width: 540px;
+        animation: rise 1.6s ease;
+        box-shadow: 0 20px 40px rgba(0,0,0,.35);
+        z-index: 2;
+    }
+
+    h1 { font-size: 36px; margin-bottom: 14px; }
+    p {
+        font-size: 18px;
+        line-height: 1.8;
+        margin: 12px 0;
+    }
+
+    .question {
+        font-size: 26px;
+        margin-top: 20px;
+        font-weight: 600;
+    }
+
+    .btns {
+        margin-top: 26px;
+    }
+
+    button {
+        padding: 12px 28px;
+        font-size: 16px;
+        border: none;
+        border-radius: 30px;
+        margin: 10px;
+        cursor: pointer;
+        background: #ff6f91;
+        color: #fff;
+        transition: transform .25s, box-shadow .25s;
+        box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    }
+    button:hover {
+        transform: translateY(-2px) scale(1.06);
+        box-shadow: 0 14px 30px rgba(0,0,0,.35);
+    }
+
+    /* Decorative floating ribbons */
+    .ribbon {
+        position: absolute;
+        top: -30px;
+        width: 8px;
+        height: 120px;
+        background: rgba(255,255,255,.7);
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        from { transform: translateY(0) rotate(10deg); opacity: 0; }
+        10% { opacity: 1; }
+        to { transform: translateY(120vh) rotate(-10deg); opacity: 0; }
+    }
+
+    @keyframes rise {
+        from { opacity: 0; transform: translateY(20px) scale(.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+    <h1>Jaya Siva Sri</h1>
+
+    <p>
+        I choose you not for a moment, but for a lifetime.
+        I promise patience when things are hard,
+        respect in every situation,
+        and support in every dream you chase.
+    </p>
+
+    <p>
+        From today and every tomorrow,
+        I want to grow with you, learn with you,
+        and stand beside you no matter where life takes us.
+    </p>
+
+    <div class="question">Will you walk this journey with me?</div>
+
+    <div class="btns">
+        <button onclick="yes()">Yes</button>
+        <button onclick="no()">Let me think</button>
+    </div>
+</div>
+
+<script>
+    function yes() {
+        alert("Thank you for choosing us. I promise to cherish you always.");
+    }
+    function no() {
+        alert("Take your time. My feelings remain the same.");
+    }
+
+    // Falling ribbons
+    setInterval(() => {
+        const r = document.createElement('div');
+        r.className = 'ribbon';
+        r.style.left = Math.random() * 100 + 'vw';
+        r.style.animationDuration = (4 + Math.random()*3) + 's';
+        document.body.appendChild(r);
+        setTimeout(() => r.remove(), 8000);
+    }, 300);
+</script>
+
+</body>
+</html>
