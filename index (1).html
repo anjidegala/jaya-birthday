@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy 18th Birthday Jaya Siva Sri</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    :root {
+        --pink: #ff6f91;
+        --purple: #a18cd1;
+    }
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        color: #fff;
+        text-align: center;
+    }
+    .hidden { display: none; }
+
+    .gate {
+        background: rgba(0,0,0,0.45);
+        padding: 40px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 520px;
+        animation: fadeIn 1.5s ease;
+    }
+
+    .count {
+        font-size: 42px;
+        letter-spacing: 2px;
+        margin: 10px 0;
+    }
+
+    .card {
+        background: rgba(0,0,0,0.35);
+        padding: 40px;
+        border-radius: 22px;
+        width: 90%;
+        max-width: 520px;
+        animation: popIn 1.5s ease;
+        z-index: 2;
+    }
+
+    h1 { font-size: 36px; margin: 0 0 10px; }
+    h2 { font-weight: normal; margin: 0 0 20px; }
+    p {
+        font-size: 18px;
+        line-height: 1.7;
+        margin: 12px 0;
+    }
+
+    button {
+        margin-top: 26px;
+        padding: 12px 26px;
+        font-size: 16px;
+        border: none;
+        border-radius: 30px;
+        background: var(--pink);
+        color: white;
+        cursor: pointer;
+        transition: transform .3s, box-shadow .3s;
+        box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    }
+    button:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 14px 30px rgba(0,0,0,.35);
+    }
+
+    /* Cute floating shapes (no emojis) */
+    .float {
+        position: absolute;
+        bottom: -40px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.8);
+        animation: floatUp linear infinite;
+        opacity: .9;
+    }
+    .float.heart {
+        transform: rotate(45deg);
+        border-radius: 0;
+    }
+    .float.heart::before,
+    .float.heart::after {
+        content: '';
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        background: rgba(255,255,255,.8);
+        border-radius: 50%;
+        top: -11px;
+        left: 0;
+    }
+    .float.heart::after {
+        left: -11px;
+        top: 0;
+    }
+
+    @keyframes floatUp {
+        from { transform: translateY(0) scale(.8); opacity: 0; }
+        10% { opacity: 1; }
+        to { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes popIn {
+        from { opacity: 0; transform: scale(.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>
+</head>
+<body>
+
+<div id="gate" class="gate">
+    <h1>Something Special Unlocks Soon</h1>
+    <p>This page opens after 12:00 PM today.</p>
+    <div id="countdown" class="count">00:00:00</div>
+    <p>Please wait a little more.</p>
+</div>
+
+<div id="content" class="card hidden">
+    <h1>Happy 18th Birthday</h1>
+    <h2>Jaya Siva Sri</h2>
+
+    <p>
+        I have been with you since my childhood, through memories, dreams,
+        and silent promises. Watching you grow into this beautiful phase of life
+        makes my heart feel proud and grateful.
+    </p>
+
+    <p>
+        Even though distance keeps us apart today, my presence never leaves you.
+        I may still be a student, but my feelings are steady, honest,
+        and meant only for you.
+    </p>
+
+    <p>
+        May this new chapter bring confidence, happiness,
+        and everything your heart wishes for.
+        I am always with you, in every step you take.
+    </p>
+
+    <button onclick="goNext()">I Have Something More For You</button>
+</div>
+
+<script>
+    function goNext() {
+        window.location.href = "proposal.html";
+    }
+
+    // Countdown gate until today 12:00 PM (local time)
+    const gate = document.getElementById('gate');
+    const content = document.getElementById('content');
+    const cd = document.getElementById('countdown');
+
+    function targetTime() {
+        const now = new Date();
+        const t = new Date();
+        t.setHours(12,0,0,0);
+        if (now > t) return now; // already passed
+        return t;
+    }
+
+    function tick() {
+        const now = new Date();
+        const t = targetTime();
+        const diff = t - now;
+
+        if (diff <= 0) {
+            gate.classList.add('hidden');
+            content.classList.remove('hidden');
+            clearInterval(timer);
+            return;
+        }
+        const h = String(Math.floor(diff / 3600000)).padStart(2,'0');
+        const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+        const s = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+        cd.textContent = `${h}:${m}:${s}`;
+    }
+    const timer = setInterval(tick, 1000);
+    tick();
+
+    // Floating cute shapes
+    setInterval(() => {
+        const d = document.createElement('div');
+        d.className = 'float ' + (Math.random() > .5 ? 'heart' : '');
+        d.style.left = Math.random() * 100 + 'vw';
+        d.style.animationDuration = (5 + Math.random()*4) + 's';
+        document.body.appendChild(d);
+        setTimeout(() => d.remove(), 9000);
+    }, 450);
+</script>
+
+</body>
+</html>
